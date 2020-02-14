@@ -1,5 +1,7 @@
 package logik;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class MenuesEingaben {
@@ -16,6 +18,17 @@ public class MenuesEingaben {
 				+ "4. 4er Ticket kaufen\n"
 				+ "5. Zeitkarte kaufen\n"
 				+ "6. Ferienticket kaufen\n ");
+	}
+	
+	public List<String> getMenue() {
+		List<String> menue = new ArrayList<String>();
+		menue.add("Einzelfahrkarte kaufen");
+		menue.add("10er Streifenkarte kaufen");
+		menue.add("TagesTicket Plus kaufen");
+		menue.add("4er Ticket kaufen");
+		menue.add("Zeitkarte kaufen");
+		menue.add("Ferienticket kaufen");
+		return menue;
 	}
 	
 	int unterMenueFuerFahrkarten(int auswahl) throws ValidierungsException {
@@ -83,6 +96,14 @@ public class MenuesEingaben {
 			throw new ValidierungsException("Das ist keine Zahl!");
 		}		
 		return eingabe;
+	}
+
+	public List<String> getUntermenue() {
+		List<String> menue = new ArrayList<String>();
+		menue.add("Wochenkarte");
+		menue.add("Monatskarte");
+		menue.add("Jahreskarte");
+		return menue;
 	}
 	
 }
