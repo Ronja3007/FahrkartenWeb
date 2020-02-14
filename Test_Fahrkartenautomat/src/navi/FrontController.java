@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import gui.MenueController;
+import gui.ZahlenController;
 
 @WebServlet(value="*.do", loadOnStartup=1)
 public class FrontController extends HttpServlet
@@ -25,6 +26,7 @@ public class FrontController extends HttpServlet
 	public void init() throws ServletException {
 		controller = new HashMap<String, Controller>();
 		controller.put("/menue", new MenueController());
+		controller.put("/zahlen", new ZahlenController());
 
 		System.out.println("Frontcontroller initialisiert");
 		System.out.println(LAYOUT_SEITE);
