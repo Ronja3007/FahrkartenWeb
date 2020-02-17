@@ -1,6 +1,6 @@
 <%@ page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>         
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
+
 <!doctype html>
 <html lang="de">
   <head>
@@ -15,6 +15,9 @@
     <link rel="STYLESHEET" type="text/css" href="<c:url value="/include/stylesheet.css"/>">
   </head>
        <body> 
+      	 	<div>
+				<h1>Fahrkarten und Tickets kaufen</h1>
+			</div>
             <div id="message">
                 <c:out value="${meldung}"/>
             </div>
@@ -22,6 +25,10 @@
             <div id="inhalt">
                 <c:import url="${url}"></c:import>
             </div>
+    <footer style = "position: fixed; padding: 10px; bottom: 0; left: 0; right: 0">
+          <a href="/Test_Fahrkartenautomat/menue.do"><button style="background-color: green">zurueck zum Hauptmenue</button></a> 
+          <a href="/Test_Fahrkartenautomat/logout.do"><button>Service</button></a>  
+    </footer>
     <script
 	  src="https://code.jquery.com/jquery-3.4.1.min.js"
 	  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="

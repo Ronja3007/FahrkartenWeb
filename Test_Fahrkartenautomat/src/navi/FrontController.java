@@ -11,8 +11,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import gui.EinZahlenController;
+import gui.LoginController;
+import gui.LogoutController;
 import gui.MenueController;
+import gui.ServiceController;
 import gui.ZahlenController;
+import logik.FahrkartenController;
 
 @WebServlet(value="*.do", loadOnStartup=1)
 public class FrontController extends HttpServlet
@@ -27,6 +32,10 @@ public class FrontController extends HttpServlet
 		controller = new HashMap<String, Controller>();
 		controller.put("/menue", new MenueController());
 		controller.put("/zahlen", new ZahlenController());
+		controller.put("/einzahlen", new EinZahlenController());
+		controller.put("/service", new ServiceController());
+		controller.put("/login", new LoginController());
+		controller.put("/logout", new LogoutController());
 
 		System.out.println("Frontcontroller initialisiert");
 		System.out.println(LAYOUT_SEITE);
@@ -42,6 +51,10 @@ public class FrontController extends HttpServlet
 		
 		System.out.println("REQUESTED: " + navi + "----------------------******************------------------------");
 		
+		if(navi.equals("/service") && request.getSession().getAttribute("eingeloggt") == null) {
+			navi = "/login";
+		}
+		
 		try
 		{
 			Controller c = controller.get(navi);
@@ -56,8 +69,8 @@ public class FrontController extends HttpServlet
 		}
 		catch (Exception e)
 		{
-			//meldung.append(e.toString());
-			e.printStackTrace();
+//			meldung.append(e.getMessage());
+//				e.printStackTrace();
 		}
 
 		request.setAttribute("notifications", meldung.toString());
@@ -67,6 +80,10 @@ public class FrontController extends HttpServlet
 			request.setAttribute("url", requestedUrl);
 		} else {
 			request.setAttribute("url", "/WEB-INF/jsp/error/error.jsp");
+		}
+		
+		if(navi.equals("/menue")) {
+			FahrkartenController.getInstance().zuruecksetzen();
 		}
 		
 		RequestDispatcher rd = request.getRequestDispatcher(LAYOUT_SEITE);

@@ -1,9 +1,7 @@
 package logik;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.ListIterator;
 
  public class GeldSachen {
 	
@@ -40,16 +38,18 @@ import java.util.ListIterator;
 		add(2000); 
 		add(5000);      		
 	}};	
-	private static int rueckgabeGeldGesamtImAutomat;
 	private Integer[] geldVorrat = new Integer[9];
-	private int fehlendesGeld;
-	private int rueckgabeGeldAnKunden;
+	private static int fehlendesGeld;
+	private static int rueckgabeGeldAnKunden;
 	private List<Integer> listeRueckgeld = new ArrayList<>();
 	private static int eingezahlt = 0;
 	private static final int MAXANZAHLSCHEINE = 300;
 	private static final int MAXANZAHLMUENZEN = 50;
 	
-	public static void main(String[] args) throws ValidierungsException {
+	public GeldSachen() {
+		rueckgabeGeldAnKunden = 0;
+		eingezahlt = 0;
+	}
 //		anzahl10CentMuenzen = geldVorrat 0
 //		anzahl20CentMuenzen = geldVorrat 1
 //		anzahl50CentMuenzen = geldVorrat 2
@@ -59,15 +59,9 @@ import java.util.ListIterator;
 //		anzahl10EuroScheine = geldVorrat.get(6);
 //		anzahl20EuroScheine = geldVorrat.get(7);
 //		anzahl50EuroScheine = geldVorrat.get(8);
-	}
 
 	public double getEingezahlt() {
 		return CentInEuro(eingezahlt);
-	}
-
-	private void berechnenFuerAutomat() {
-		rueckgabeGeldGesamtImAutomat = 5000*geldVorrat[8] + 2000*geldVorrat[7]  + 1000*geldVorrat[6]  + 500*geldVorrat[5]  + 
-				200* geldVorrat[4]  + 100*geldVorrat[3]  + 50*geldVorrat[2]  + 20*geldVorrat[1]  + 10*geldVorrat[0] ;
 	}
 
 	private void geldAusEinzahlen(int betrag) throws ValidierungsException{
@@ -105,7 +99,6 @@ import java.util.ListIterator;
 			}
 		}
 		daten.datenSpeichern(geldVorrat);
-		berechnenFuerAutomat();
 	}
 	
 	private void wechselgeldBerechnen(int betrag, int preis) throws ValidierungsException {
@@ -131,6 +124,14 @@ import java.util.ListIterator;
 		return rueckgabe;
 	}
 
+	public List<Double> getAkzeptiertesgeld() {
+		List<Double> rueckgabe = new ArrayList<Double>();
+		for (int i : akzeptiertesGeld) {
+			rueckgabe.add(CentInEuro(i));
+		}
+		return rueckgabe;
+	}
+
 	public void betragPruefen(double einzahlung, double preis) throws ValidierungsException {
 		int einzahlungInCent = EuroInCent(einzahlung);
 		int preisInCent = EuroInCent(preis);
@@ -140,6 +141,8 @@ import java.util.ListIterator;
 				fehlendesGeld = preisInCent - eingezahlt;
 			}
 			if(eingezahlt > preisInCent) {
+//				eingezahlt = 0;
+				fehlendesGeld = 0;
 				wechselgeldBerechnen(einzahlungInCent, preisInCent);
 			}
 		}else {
@@ -149,7 +152,11 @@ import java.util.ListIterator;
 		}
 	}
 
-	public double getFehlendesGeld() {
+	public double getFehlendesGeld(double preis) {
+		fehlendesGeld = EuroInCent(preis) - eingezahlt;
+		if(fehlendesGeld < 0) {
+			return 0;
+		}
 		return CentInEuro(fehlendesGeld);
 	}
 
@@ -179,11 +186,21 @@ import java.util.ListIterator;
 		sachen.add("Wochenkarte");
 		sachen.add("Monatskarte");
 		sachen.add("Jahreskarte");
-		sachen.add("Einzelfahrt");
+		sachen.add("Einzelfahrkarte");
 		sachen.add("10er Streifenkarte");
 		sachen.add("Tagesticket Plus");
-		sachen.add("4er Karte");
+		sachen.add("4er Ticket");
 		sachen.add("Ferienticket");
 		return sachen;
+	}
+
+	public void zuruecksetzen() {
+		eingezahlt = 0;
+		rueckgabeGeldAnKunden = 0;
+		fehlendesGeld = 0;
+	}
+	
+	void geldAuffuellenOderLeeren(int auswahlGeldFach, int anzahl) {
+		geldVorrat[auswahlGeldFach]+= anzahl;
 	}
 }

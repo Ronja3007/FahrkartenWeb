@@ -1,5 +1,4 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 
 <div>
 Willkommen!<br>Was moechtest du tun?
@@ -7,17 +6,76 @@ Willkommen!<br>Was moechtest du tun?
 <div>
 	<table>
 		<c:forEach var="eintrag" items="${menue}">
-			<c:if test="${eintrag != 'Zeitkarte kaufen'}">
-			<tr><td>
-				<form action="<c:url value ='/zahlen.do'/>" method="post">
-				<button type="submit"><c:out value="${eintrag}"></c:out></button>
-				</form>
-			</td></tr>
+			<c:if test="${eintrag ==  'Einzelfahrkarte kaufen'}">
+				<tr><td>
+						<form action="<c:url value ='/zahlen.do'/>" method="post">
+						<input type="hidden" name = "auswahl" value = "4">
+						<button type="submit"><c:out value="${eintrag}"></c:out></button>
+						</form>
+					</td></tr>
 			</c:if>
+			<c:if test="${eintrag ==  '10er Streifenkarte kaufen'}">
+				<tr><td>
+						<form action="<c:url value ='/zahlen.do'/>" method="post">
+						<input type="hidden" name = "auswahl" value = "5">
+						<button type="submit"><c:out value="${eintrag}"></c:out></button>
+						</form>
+					</td></tr>
+			</c:if>
+			<c:if test="${eintrag ==  'TagesTicket Plus kaufen'}">
+				<tr><td>
+						<form action="<c:url value ='/zahlen.do'/>" method="post">
+						<input type="hidden" name = "auswahl" value = "6">
+						<button type="submit"><c:out value="${eintrag}"></c:out></button>
+						</form>
+					</td></tr>
+			</c:if>
+			<c:if test="${eintrag ==  '4er Ticket kaufen'}">
+				<tr><td>
+						<form action="<c:url value ='/zahlen.do'/>" method="post">
+						<input type="hidden" name = "auswahl" value = "7">
+						<button type="submit"><c:out value="${eintrag}"></c:out></button>
+						</form>
+					</td></tr>
+			</c:if>
+			<c:if test="${eintrag ==  'Ferienticket kaufen'}">
+				<tr><td>
+						<form action="<c:url value ='/zahlen.do'/>" method="post">
+						<input type="hidden" name = "auswahl" value = "8">
+						<button type="submit"><c:out value="${eintrag}"></c:out></button>
+						</form>
+					</td></tr>
+			</c:if>
+			<c:if test="${eintrag ==  'Wochenkarte'}">
+				<tr><td>
+						<form action="<c:url value ='/zahlen.do'/>" method="post">
+						<input type="hidden" name = "auswahl" value = "1">
+						<button type="submit"><c:out value="${eintrag}"></c:out></button>
+						</form>
+					</td></tr>
+			</c:if>
+			<c:if test="${eintrag ==  'Monatskarte'}">
+				<tr><td>
+						<form action="<c:url value ='/zahlen.do'/>" method="post">
+						<input type="hidden" name = "auswahl" value = "2">
+						<button type="submit"><c:out value="${eintrag}"></c:out></button>
+						</form>
+					</td></tr>
+			</c:if>
+			<c:if test="${eintrag ==  'Jahreskarte'}">
+				<tr><td>
+						<form action="<c:url value ='/zahlen.do'/>" method="post">
+						<input type="hidden" name = "auswahl" value = "3">
+						<button type="submit"><c:out value="${eintrag}"></c:out></button>
+						</form>
+					</td></tr>
+			</c:if>
+			
+			
 			<c:if test="${eintrag ==  'Zeitkarte kaufen'}">
 				<tr><td>
 						<form action="<c:url value ='/menue.do'/>" method="post">
-						<input type="hidden" name = "untermenue" value = "1">
+						<input type="hidden" name = "auswahl" value = "9">
 						<button type="submit"><c:out value="${eintrag}"></c:out></button>
 						</form>
 					</td></tr>
