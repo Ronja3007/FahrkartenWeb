@@ -4,7 +4,7 @@
 	<form action ="/Test_Fahrkartenautomat/login.do" method="post">
 		<div class="form-group">
 			<div>
-				<h2>Login</h2>
+				<h3>Login</h3>
 				<input type = "text" placeholder="Benutzername" autocomplete="off" name = "Benutzername">
 			</div>
 		</div>

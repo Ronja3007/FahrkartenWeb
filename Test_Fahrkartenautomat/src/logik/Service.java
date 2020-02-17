@@ -2,11 +2,29 @@ package logik;
 
 public class Service {
 
-	void geldAuffuellen(int anzahl, int auswahlGeldFach){
-		FahrkartenController.getInstance().getFinanzen().geldAuffuellenOderLeeren(auswahlGeldFach, anzahl);
+	public void pruefen(String fach, String anzahl, String addOderSub) throws ValidierungsException {
+		int anzahlINT = pruefen(anzahl);
+		if(addOderSub.equals("auffuellen")) {
+			geldAuffuellen(anzahlINT, fach);
+		}
+		if(addOderSub.equals("leeren")) {
+			geldLeeren(anzahlINT, fach);
+		}
+	}
+
+	private int pruefen(String anzahl) throws ValidierungsException {
+		try {
+			return Integer.parseInt(anzahl);
+		}catch (Exception e) {
+			throw new ValidierungsException(e.getMessage());
+		}
+	}
+
+	private void geldAuffuellen(int anzahl, String fach) throws ValidierungsException{
+		FahrkartenController.getInstance().getFinanzen().geldAuffuellenOderLeeren(fach, anzahl);
 	}
 	
-	void geldLeeren(int anzahl, int auswahlGeldFach) {
+	private void geldLeeren(int anzahl, String auswahlGeldFach) throws ValidierungsException {
 		FahrkartenController.getInstance().getFinanzen().geldAuffuellenOderLeeren(auswahlGeldFach, -anzahl);
 	}
 }

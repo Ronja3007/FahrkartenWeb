@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 
 <div>
-Willkommen!<br>Was moechtest du tun?
+	<h3>Willkommen!</h3>Was moechtest du tun?
 </div>
 <div>
 	<table>

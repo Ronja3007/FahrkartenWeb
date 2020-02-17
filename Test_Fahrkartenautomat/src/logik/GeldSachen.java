@@ -63,10 +63,13 @@ import java.util.List;
 	public double getEingezahlt() {
 		return CentInEuro(eingezahlt);
 	}
+	private void datenSpeichern(Integer[] geldVorrat) throws ValidierungsException {
+		AbspeichernAuslesen daten = new AbspeichernAuslesen();
+		daten.datenSpeichern(geldVorrat);
+		geldVorrat = daten.datenAuslesen();
+	}
 
 	private void geldAusEinzahlen(int betrag) throws ValidierungsException{
-		AbspeichernAuslesen daten = new AbspeichernAuslesen();
-		geldVorrat = daten.datenAuslesen();
 		for(int i = 0; i< 9; i++) {
 			if(betrag == akzeptiertesGeld.get(i) || -betrag == akzeptiertesGeld.get(i)) {
 				if(betrag < 0) {
@@ -98,7 +101,7 @@ import java.util.List;
 				}
 			}
 		}
-		daten.datenSpeichern(geldVorrat);
+		datenSpeichern(geldVorrat);
 	}
 	
 	private void wechselgeldBerechnen(int betrag, int preis) throws ValidierungsException {
@@ -194,13 +197,28 @@ import java.util.List;
 		return sachen;
 	}
 
-	public void zuruecksetzen() {
+	public void zuruecksetzen() throws ValidierungsException {
 		eingezahlt = 0;
 		rueckgabeGeldAnKunden = 0;
 		fehlendesGeld = 0;
+		datenSpeichern(geldVorrat);
 	}
 	
-	void geldAuffuellenOderLeeren(int auswahlGeldFach, int anzahl) {
-		geldVorrat[auswahlGeldFach]+= anzahl;
+	void geldAuffuellenOderLeeren(String fachSTR, int anzahl) throws ValidierungsException {
+		int fach = pruefen(fachSTR);
+		if(fach < 5) {
+			if(geldVorrat[fach]+anzahl > 0 && geldVorrat[fach]+ anzahl < MAXANZAHLMUENZEN)
+				geldVorrat[fach]+= anzahl;
+		}
+		if(fach >= 5) {
+			if(geldVorrat[fach] + anzahl > 0 && geldVorrat[fach] < MAXANZAHLSCHEINE) {
+				geldVorrat[fach]+= anzahl;
+			}
+		}
+		datenSpeichern(geldVorrat);
+	}
+	private int pruefen(String fachSTR) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }

@@ -14,6 +14,7 @@ public class LoginController implements Controller {
 			String passwort = request.getParameter("Passwort");
 			if(benutzername.equals("123") && passwort.equals("123")) {
 				request.getSession().setAttribute("eingeloggt", "ja");
+				new ServiceController().execute(request, response, message);
 				return "/service";
 			}
 		}

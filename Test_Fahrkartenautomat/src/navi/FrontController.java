@@ -57,6 +57,9 @@ public class FrontController extends HttpServlet
 		
 		try
 		{
+			if(navi.equals("/menue")) {
+				FahrkartenController.getInstance().zuruecksetzen();
+			}
 			Controller c = controller.get(navi);
 			if (c != null)
 			{
@@ -80,10 +83,6 @@ public class FrontController extends HttpServlet
 			request.setAttribute("url", requestedUrl);
 		} else {
 			request.setAttribute("url", "/WEB-INF/jsp/error/error.jsp");
-		}
-		
-		if(navi.equals("/menue")) {
-			FahrkartenController.getInstance().zuruecksetzen();
 		}
 		
 		RequestDispatcher rd = request.getRequestDispatcher(LAYOUT_SEITE);
