@@ -23,7 +23,7 @@ public class FahrkartenController {
 		return menue;
 	}
 	
-	public Service getserService () {
+	public Service getService () {
 		return service;
 	}
 	
@@ -34,7 +34,11 @@ public class FahrkartenController {
 		return FahrkartenController.instance;
 	}
 
-	public void zuruecksetzen() {
-		finanzen.zuruecksetzen();
+	public void zuruecksetzen() throws Exception {
+		try {
+			finanzen.zuruecksetzen();
+		} catch (ValidierungsException e) {
+			throw new Exception(e.getMessage());
+		}
 	}
 }
