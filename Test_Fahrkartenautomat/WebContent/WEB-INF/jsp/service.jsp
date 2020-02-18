@@ -2,7 +2,18 @@
 <div>
 	<h3>Service</h3>
 </div>
+<div>
+Uebersicht Fuellstand:
+<table border="1">
+	<tr><th>Faecher</th><th>Anzahl</th></tr>
+	<c:forEach var="entry" items="${fuellstand}">
+	  <tr><td><c:out value="${entry.key} Euro"/></td><td><c:out value="${entry.value}"/></td></tr>
+	</c:forEach>
+</table>
+</div>
+<div>
 Was moechten Sie tun?  
+</div>
 <div>
 <form action ="/Test_Fahrkartenautomat/service.do" method="post">
 	<select name="welchesFach">

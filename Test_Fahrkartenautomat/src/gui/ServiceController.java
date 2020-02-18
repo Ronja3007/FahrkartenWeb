@@ -1,6 +1,7 @@
 package gui;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,6 +14,8 @@ public class ServiceController implements Controller {
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response, StringBuffer message)
 			throws Exception {
+		Map<Double, Integer> fuellstand = FahrkartenController.getInstance().getFinanzen().getFuellstand();
+		request.setAttribute("fuellstand", fuellstand);
 		List<Double> faecher = FahrkartenController.getInstance().getFinanzen().getAkzeptiertesgeld();
 		request.setAttribute("faecher", faecher);
 		String addOderSub = request.getParameter("auffuellenOderLeeren");

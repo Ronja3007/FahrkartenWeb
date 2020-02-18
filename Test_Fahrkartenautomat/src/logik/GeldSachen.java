@@ -2,6 +2,8 @@ package logik;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
  public class GeldSachen {
 	
@@ -149,7 +151,6 @@ import java.util.List;
 				fehlendesGeld = preisInCent - eingezahlt;
 			}
 			if(eingezahlt > preisInCent) {
-//				eingezahlt = 0;
 				fehlendesGeld = 0;
 				wechselgeldBerechnen(einzahlungInCent, preisInCent);
 			}
@@ -225,5 +226,13 @@ import java.util.List;
 	private int pruefen(String fachSTR) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	public Map<Double, Integer> getFuellstand() {
+		TreeMap<Double, Integer> rueckgabe = new TreeMap<>();
+		for(int i = 0; i< akzeptiertesGeld.size(); i++) {
+			rueckgabe.put(CentInEuro(akzeptiertesGeld.get(i)), geldVorrat[i]);
+		}
+		return rueckgabe;
 	}
 }
