@@ -2,17 +2,13 @@
 
 <div>
 	<form action ="/Test_Fahrkartenautomat/login.do" method="post">
-		<div class="form-group">
-			<div>
-				<h3>Login</h3>
-				<input type = "text" placeholder="Benutzername" autocomplete="off" name = "Benutzername">
-			</div>
+		<div>
+			<h3>Login</h3>
+			<input type = "text" placeholder="Benutzername" autocomplete="off" name = "Benutzername">
 		</div>
-		<div class="form-group">
-			<div >
-			<input type="password" placeholder="Passwort" name = "Passwort">
-				<button type="submit">Login</button>
-			</div>
+		<div >
+		<input type="password" placeholder="Passwort" name = "Passwort">
+			<button type="submit">Login</button>
 		</div>
 	</form>
 </div>

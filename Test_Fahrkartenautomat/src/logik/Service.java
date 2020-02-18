@@ -5,10 +5,10 @@ public class Service {
 	public void pruefen(String fach, String anzahl, String addOderSub) throws ValidierungsException {
 		int anzahlINT = pruefen(anzahl);
 		if(addOderSub.equals("auffuellen")) {
-			geldAuffuellen(anzahlINT, fach);
+			geldAuffuellenLeeren(anzahlINT, fach);
 		}
 		if(addOderSub.equals("leeren")) {
-			geldLeeren(anzahlINT, fach);
+			geldAuffuellenLeeren(-anzahlINT, fach);
 		}
 	}
 
@@ -16,15 +16,11 @@ public class Service {
 		try {
 			return Integer.parseInt(anzahl);
 		}catch (Exception e) {
-			throw new ValidierungsException(e.getMessage());
+			throw new ValidierungsException("Das ist keine Zahl!");
 		}
 	}
 
-	private void geldAuffuellen(int anzahl, String fach) throws ValidierungsException{
+	private void geldAuffuellenLeeren(int anzahl, String fach) throws ValidierungsException{
 		FahrkartenController.getInstance().getFinanzen().geldAuffuellenOderLeeren(fach, anzahl);
-	}
-	
-	private void geldLeeren(int anzahl, String auswahlGeldFach) throws ValidierungsException {
-		FahrkartenController.getInstance().getFinanzen().geldAuffuellenOderLeeren(auswahlGeldFach, -anzahl);
 	}
 }

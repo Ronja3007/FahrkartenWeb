@@ -1,7 +1,6 @@
 package logik;
 
 public class ValidierungsException extends Exception{
-	
 	/**
 	 * 
 	 */

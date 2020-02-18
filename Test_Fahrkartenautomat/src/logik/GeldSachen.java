@@ -81,29 +81,22 @@ import java.util.TreeMap;
 						geldVorrat[i] -= 1;
 						break;
 					}else {
-						System.out.println(CentInEuro(betrag*-1) + "-Fach ist leer!");
-//						throw new ValidierungsException(betrag*-1 + "-Fach ist leer!");
+						throw new ValidierungsException(CentInEuro(betrag*-1) + "-Fach ist leer!");
 					}
 				}
 				if(betrag > 0) {
+					int pruef;
 					if(betrag < 500) {
-						if(geldVorrat[i] < MAXANZAHLMUENZEN) {
-							geldVorrat[i] += 1;
-							eingezahlt += betrag;
-							break;
-						}else {
-							System.out.println("Leider ist der " + CentInEuro(betrag) + " Euro-Maximalmuenzstand erreicht!");
-//							throw new ValidierungsException("Leider ist dieser Maximalmuenzstand erreicht!");
-						}
-					}else{
-						if(geldVorrat[i] < MAXANZAHLSCHEINE) {
-							geldVorrat[i] += 1;
-							eingezahlt += betrag;
-							break;
-						}else {
-							System.out.println("Leider ist der " + CentInEuro(betrag) + " Euro-Maximalscheinstand erreicht!");
-//							throw new ValidierungsException("Leider ist dieser Maximalscheinstand erreicht!");
-						}
+						pruef = MAXANZAHLMUENZEN;
+					}else {
+						pruef = MAXANZAHLSCHEINE;
+					}
+					if(geldVorrat[i] <= pruef) {
+						geldVorrat[i] += 1;
+						eingezahlt += betrag;
+						break;
+					}else {
+						throw new ValidierungsException("Leider ist das " + CentInEuro(betrag) + " Euro-Fach voll! Bitte andere Geldstuecke/-scheine einwerfen!");
 					}
 				}
 			}
@@ -145,19 +138,13 @@ import java.util.TreeMap;
 	public void betragPruefen(double einzahlung, double preis) throws ValidierungsException {
 		int einzahlungInCent = EuroInCent(einzahlung);
 		int preisInCent = EuroInCent(preis);
-		if(akzeptiertesGeld.contains(einzahlungInCent)) {
-			geldAusEinzahlen(einzahlungInCent);
-			if(eingezahlt < preisInCent) {
-				fehlendesGeld = preisInCent - eingezahlt;
-			}
-			if(eingezahlt > preisInCent) {
-				fehlendesGeld = 0;
-				wechselgeldBerechnen(einzahlungInCent, preisInCent);
-			}
-		}else {
+		geldAusEinzahlen(einzahlungInCent);
+		if(eingezahlt < preisInCent) {
 			fehlendesGeld = preisInCent - eingezahlt;
-			System.out.println("Dieser Betrag entspricht keinen der aufgefuehrten einzahlbaren Betraege!");
-			throw new ValidierungsException("Dieser Betrag entspricht keinen der aufgefuehrten einzahlbaren Betraege!");
+		}
+		if(eingezahlt > preisInCent) {
+			fehlendesGeld = 0;
+			wechselgeldBerechnen(einzahlungInCent, preisInCent);
 		}
 	}
 
@@ -220,19 +207,16 @@ import java.util.TreeMap;
 	
 	void geldAuffuellenOderLeeren(String fachSTR, int anzahl) throws ValidierungsException {
 		int fach = pruefen(fachSTR);
+		int pruef;
 		if(fach < 5) {
-			if(geldVorrat[fach]+anzahl > 0 && geldVorrat[fach]+ anzahl <= MAXANZAHLMUENZEN) {
-				geldVorrat[fach]+= anzahl;
-			}else {
-				throw new ValidierungsException("Kann nicht aufgefuellt/geleert werden! Es wuerde den Mindest/Maximalfuellstand ueberschreiten");
-			}
+			pruef = MAXANZAHLMUENZEN;
+		}else {
+			pruef = MAXANZAHLSCHEINE;
 		}
-		if(fach >= 5) {
-			if(geldVorrat[fach] + anzahl > 0 && geldVorrat[fach] <= MAXANZAHLSCHEINE) {
-				geldVorrat[fach]+= anzahl;
-			}else {
-				throw new ValidierungsException("Kann nicht aufgefuellt/geleert werden! Es wuerde den Mindest/Maximalfuellstand ueberschreiten");
-			}
+		if(geldVorrat[fach]+anzahl >= 0 && geldVorrat[fach]+ anzahl <= pruef) {
+			geldVorrat[fach]+= anzahl;
+		}else {
+			throw new ValidierungsException("Kann nicht aufgefuellt/geleert werden! Es wuerde den Mindest/Maximalfuellstand ueberschreiten!");
 		}
 		datenSpeichern(geldVorrat);
 	}

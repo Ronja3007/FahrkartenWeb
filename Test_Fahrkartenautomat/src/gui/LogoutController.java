@@ -11,7 +11,6 @@ public class LogoutController implements Controller {
 	public String execute(HttpServletRequest request, HttpServletResponse response, StringBuffer message)
 			throws Exception {
 		request.getSession().invalidate();
-		request.getSession().setAttribute("eingeloggt", null);
 		new LoginController().execute(request, response, message);
 		return "/login";
 	}

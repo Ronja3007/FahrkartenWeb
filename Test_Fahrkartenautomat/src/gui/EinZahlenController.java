@@ -24,7 +24,6 @@ public class EinZahlenController implements Controller {
 			new ZahlenController().execute(request, response, message);
 			return "/zahlen";
 		}catch (ValidierungsException v) {
-			System.out.println("Fehler");
 			throw new Exception(v.getMessage());
 		}
 	}

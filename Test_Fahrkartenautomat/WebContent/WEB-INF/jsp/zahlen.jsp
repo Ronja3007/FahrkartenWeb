@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+
 <div>
 <h3><c:out value="${ueberschrift} kaufen"></c:out></h3>
 </div>

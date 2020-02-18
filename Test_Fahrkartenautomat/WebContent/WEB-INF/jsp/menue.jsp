@@ -70,8 +70,6 @@
 						</form>
 					</td></tr>
 			</c:if>
-			
-			
 			<c:if test="${eintrag ==  'Zeitkarte kaufen'}">
 				<tr><td>
 						<form action="<c:url value ='/menue.do'/>" method="post">

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import logik.FahrkartenController;
 import logik.GeldSachen;
+import logik.ValidierungsException;
 import navi.Controller;
 
 public class ServiceController implements Controller {
@@ -27,13 +28,17 @@ public class ServiceController implements Controller {
 		String addOderSub = request.getParameter("auffuellenOderLeeren");
 		String anzahl = request.getParameter("anzahl");
 		String fach = request.getParameter("welchesFach");
+		Map<Double, Integer> fuellstand = getFuellstand();
+		request.setAttribute("fuellstand", fuellstand);
 		if(anzahl != null) {
 			FahrkartenController.getInstance().getService().pruefen(fach, anzahl, addOderSub);
+			fuellstand = getFuellstand();
+			request.setAttribute("fuellstand", fuellstand);
 		}
-		
-		Map<Double, Integer> fuellstand = FahrkartenController.getInstance().getFinanzen().getFuellstand();
-		request.setAttribute("fuellstand", fuellstand);
 		return null;
 	}
 
+	private Map<Double, Integer> getFuellstand() throws ValidierungsException {
+		return FahrkartenController.getInstance().getFinanzen().getFuellstand();
+	}
 }

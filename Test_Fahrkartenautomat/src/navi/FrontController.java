@@ -72,6 +72,7 @@ public class FrontController extends HttpServlet
 		}
 		catch (Exception e)
 		{
+			System.out.println(e.getMessage());
 			meldung.append(e.getMessage());
 //				e.printStackTrace();
 		}
@@ -99,5 +100,4 @@ public class FrontController extends HttpServlet
 		}
 		return false;
 	}
-	
 }
