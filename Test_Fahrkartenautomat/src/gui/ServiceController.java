@@ -13,13 +13,12 @@ public class ServiceController implements Controller {
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response, StringBuffer message)
 			throws Exception {
-		
 		List<Double> faecher = FahrkartenController.getInstance().getFinanzen().getAkzeptiertesgeld();
 		request.setAttribute("faecher", faecher);
 		String addOderSub = request.getParameter("auffuellenOderLeeren");
 		String anzahl = request.getParameter("anzahl");
 		String fach = request.getParameter("welchesFach");
-		FahrkartenController.getInstance().getService().pruefen(fach, anzahl, addOderSub);
+//		FahrkartenController.getInstance().getService().pruefen(fach, anzahl, addOderSub);
 		return null;
 	}
 
