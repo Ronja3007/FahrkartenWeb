@@ -9,7 +9,7 @@ public class FahrkartenController {
 	
 	public void main(String[] args) {}
 	
-	private FahrkartenController() {
+	private FahrkartenController() throws ValidierungsException {
 		finanzen = new GeldSachen();
 		menue = new MenuesEingaben();
 		service = new Service();
@@ -27,7 +27,7 @@ public class FahrkartenController {
 		return service;
 	}
 	
-	public static FahrkartenController getInstance () {
+	public static FahrkartenController getInstance () throws ValidierungsException {
 		if (FahrkartenController.instance == null) {
 			FahrkartenController.instance = new FahrkartenController ();
 		}

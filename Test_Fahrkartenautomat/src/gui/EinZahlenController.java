@@ -22,11 +22,10 @@ public class EinZahlenController implements Controller {
 			request.setAttribute("einzahlen", true);
 			
 			new ZahlenController().execute(request, response, message);
-			
-			
+			return "/zahlen";
 		}catch (ValidierungsException v) {
+			System.out.println("Fehler");
 			throw new Exception(v.getMessage());
 		}
-		return "/zahlen";
 	}
 }

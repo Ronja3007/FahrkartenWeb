@@ -57,9 +57,6 @@ public class FrontController extends HttpServlet
 		
 		try
 		{
-			if(navi.equals("/menue")) {
-				FahrkartenController.getInstance().zuruecksetzen();
-			}
 			Controller c = controller.get(navi);
 			if (c != null)
 			{
@@ -69,10 +66,13 @@ public class FrontController extends HttpServlet
 					System.out.println("NEU: " + navi + "----------------------******************------------------------");
 				}
 			}
+			if(navi.equals("/menue")) {
+				FahrkartenController.getInstance().zuruecksetzen();
+			}
 		}
 		catch (Exception e)
 		{
-//			meldung.append(e.getMessage());
+			meldung.append(e.getMessage());
 //				e.printStackTrace();
 		}
 

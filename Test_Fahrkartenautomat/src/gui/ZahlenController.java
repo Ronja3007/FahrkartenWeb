@@ -6,7 +6,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import logik.FahrkartenController;
-import logik.ValidierungsException;
 import navi.Controller;
 
 public class ZahlenController implements Controller {

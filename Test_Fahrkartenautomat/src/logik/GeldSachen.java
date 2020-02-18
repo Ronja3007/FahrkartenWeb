@@ -46,9 +46,11 @@ import java.util.List;
 	private static final int MAXANZAHLSCHEINE = 300;
 	private static final int MAXANZAHLMUENZEN = 50;
 	
-	public GeldSachen() {
+	public GeldSachen() throws ValidierungsException {
 		rueckgabeGeldAnKunden = 0;
 		eingezahlt = 0;
+		AbspeichernAuslesen daten = new AbspeichernAuslesen();
+		geldVorrat = daten.datenAuslesen();
 	}
 //		anzahl10CentMuenzen = geldVorrat 0
 //		anzahl20CentMuenzen = geldVorrat 1
@@ -75,9 +77,10 @@ import java.util.List;
 				if(betrag < 0) {
 					if(geldVorrat[i] > 0) {
 						geldVorrat[i] -= 1;
+						break;
 					}else {
 						System.out.println(CentInEuro(betrag*-1) + "-Fach ist leer!");
-//						throw new ValidierungsException(betrag*-1 + "-Fach ist leer!");
+						throw new ValidierungsException(betrag*-1 + "-Fach ist leer!");
 					}
 				}
 				if(betrag > 0) {
@@ -85,17 +88,19 @@ import java.util.List;
 						if(geldVorrat[i] < MAXANZAHLMUENZEN) {
 							geldVorrat[i] += 1;
 							eingezahlt += betrag;
+							break;
 						}else {
 							System.out.println("Leider ist der " + CentInEuro(betrag) + " Euro-Maximalmuenzstand erreicht!");
-//							throw new ValidierungsException("Leider ist dieser Maximalmuenzstand erreicht!");
+							throw new ValidierungsException("Leider ist dieser Maximalmuenzstand erreicht!");
 						}
 					}else{
 						if(geldVorrat[i] < MAXANZAHLSCHEINE) {
 							geldVorrat[i] += 1;
 							eingezahlt += betrag;
+							break;
 						}else {
 							System.out.println("Leider ist der " + CentInEuro(betrag) + " Euro-Maximalscheinstand erreicht!");
-//							throw new ValidierungsException("Leider ist dieser Maximalscheinstand erreicht!");
+							throw new ValidierungsException("Leider ist dieser Maximalscheinstand erreicht!");
 						}
 					}
 				}
@@ -151,7 +156,7 @@ import java.util.List;
 		}else {
 			fehlendesGeld = preisInCent - eingezahlt;
 			System.out.println("Dieser Betrag entspricht keinen der aufgefuehrten einzahlbaren Betraege!");
-//			throw new ValidierungsException("Dieser Betrag entspricht keinen der aufgefuehrten einzahlbaren Betraege!");
+			throw new ValidierungsException("Dieser Betrag entspricht keinen der aufgefuehrten einzahlbaren Betraege!");
 		}
 	}
 
