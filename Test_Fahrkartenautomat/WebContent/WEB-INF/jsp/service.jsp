@@ -33,7 +33,7 @@ Uebersicht Fuellstand:
 		<option value = "leeren">leeren</option>
 	</select> <br>
 	Wie viel kommt dazu/weg?
-	<input type="text" name = "anzahl">
+	<input type="text" name = "anzahl" autocomplete="off">
 	<button type="submit">LOS</button>
 </form>
 </div>

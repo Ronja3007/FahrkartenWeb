@@ -221,19 +221,29 @@ import java.util.TreeMap;
 	void geldAuffuellenOderLeeren(String fachSTR, int anzahl) throws ValidierungsException {
 		int fach = pruefen(fachSTR);
 		if(fach < 5) {
-			if(geldVorrat[fach]+anzahl > 0 && geldVorrat[fach]+ anzahl < MAXANZAHLMUENZEN)
+			if(geldVorrat[fach]+anzahl > 0 && geldVorrat[fach]+ anzahl <= MAXANZAHLMUENZEN) {
 				geldVorrat[fach]+= anzahl;
+			}else {
+				throw new ValidierungsException("Kann nicht aufgefuellt/geleert werden! Es wuerde den Mindest/Maximalfuellstand ueberschreiten");
+			}
 		}
 		if(fach >= 5) {
-			if(geldVorrat[fach] + anzahl > 0 && geldVorrat[fach] < MAXANZAHLSCHEINE) {
+			if(geldVorrat[fach] + anzahl > 0 && geldVorrat[fach] <= MAXANZAHLSCHEINE) {
 				geldVorrat[fach]+= anzahl;
+			}else {
+				throw new ValidierungsException("Kann nicht aufgefuellt/geleert werden! Es wuerde den Mindest/Maximalfuellstand ueberschreiten");
 			}
 		}
 		datenSpeichern(geldVorrat);
 	}
 	private int pruefen(String fachSTR) {
-		// TODO Auto-generated method stub
-		return 0;
+		double fach = Double.parseDouble(fachSTR);
+		for(int i = 0; i < akzeptiertesGeld.size(); i++) {
+			if(EuroInCent(fach) == akzeptiertesGeld.get(i)) {
+				return i;
+			}
+		}
+		return -1;
 	}
 
 	public Map<Double, Integer> getFuellstand() {
