@@ -120,9 +120,7 @@ import java.util.TreeMap;
 					if(akzeptiertesGeld.get(i).equals(10)) {
 						throw new ValidierungsException("Leider ist die Ausgabe des restlichen Rueckgeldes nicht moeglich, da nicht kleiner gewechselt werden kann!");
 					}
-					betrag -= akzeptiertesGeld.get(i-1);
-					geldAusEinzahlen(-akzeptiertesGeld.get(i-1));
-					listeRueckgeld.add(akzeptiertesGeld.get(i-1));
+					break;
 				}
 			}
 		}
