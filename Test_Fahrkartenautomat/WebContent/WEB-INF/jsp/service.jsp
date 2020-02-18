@@ -22,6 +22,7 @@ Uebersicht Fuellstand:
 	Was moechten Sie tun?  
 </div>
 <div>
+<br>
 <form action ="/Test_Fahrkartenautomat/service.do" method="post">
 	<select name="welchesFach">
 		<c:forEach var="eintrag" items= "${faecher}">
@@ -38,10 +39,17 @@ Uebersicht Fuellstand:
 </form>
 </div>
 <div>
+    <br>
 	<form action="/Test_Fahrkartenautomat/service.do" method= "post">
 		<input type="hidden" name = "allesLeer" value = "leer">
 		<button type="submit" style="background-color: red;">Alle Faecher leeren</button>
 	</form>
+	<br>
+	<form action="/Test_Fahrkartenautomat/service.do" method= "post">
+		<input type="hidden" name = "mitte" value = "mitte">
+		<button type="submit" style="background-color: orange;">Alle Faecher auf Mittelstand</button>
+	</form>
+	<br>
 </div>
 <div>
 <a href=<c:url value='/logout.do'/>><button>Logout</button></a>  

@@ -245,9 +245,22 @@ import java.util.TreeMap;
 		return rueckgabe;
 	}
 
-	public void leeren() {
+	public void leeren() throws ValidierungsException {
 		for(int i=0; i< geldVorrat.length; i++) {
 			geldVorrat[i] = 0;
 		}
+		datenSpeichern(geldVorrat);
+	}
+
+	public void mittelStand() throws ValidierungsException {
+		for(int i=0; i< geldVorrat.length; i++) {
+			if(i < 5) {
+				geldVorrat[i] = MAXANZAHLMUENZEN/2;
+			}
+			if(i >= 5) {
+				geldVorrat[i] = MAXANZAHLSCHEINE/2;
+			}
+		}
+		datenSpeichern(geldVorrat);
 	}
 }

@@ -32,4 +32,8 @@ public class Service {
 	public void allesLeeren() throws ValidierungsException {
 		FahrkartenController.getInstance().getFinanzen().leeren();
 	}
+
+	public void mittel() throws ValidierungsException {
+		FahrkartenController.getInstance().getFinanzen().mittelStand();	
+	}
 }
