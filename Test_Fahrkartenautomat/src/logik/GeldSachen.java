@@ -16,7 +16,7 @@ import java.util.TreeMap;
 	{
 		add(4440);      //Wochenkarte    1
 		add(17610);   //Monatskarte      2 
-		add(13970);   //Jahreskarte      3
+		add(13980);   //Jahreskarte      3
 		add(740);   //Einzelfahrkarte    4
 		add(1230);   //10er Steifenkarte 5
 		add(1680);   //Tagesticket plus  6
@@ -91,7 +91,7 @@ import java.util.TreeMap;
 					}else {
 						pruef = MAXANZAHLSCHEINE;
 					}
-					if(geldVorrat[i] <= pruef) {
+					if(geldVorrat[i] < pruef) {
 						geldVorrat[i] += 1;
 						eingezahlt += betrag;
 						break;
@@ -112,9 +112,18 @@ import java.util.TreeMap;
 	private void inGeldstueckeUmrechenen(int betrag) throws ValidierungsException {
 		for (int i = akzeptiertesGeld.size()-1; i >= 0; i--) {
 			while(betrag >= akzeptiertesGeld.get(i)) {
-				betrag -= akzeptiertesGeld.get(i);
-				geldAusEinzahlen(-akzeptiertesGeld.get(i));
-				listeRueckgeld.add(akzeptiertesGeld.get(i));
+				if(geldVorrat[i] > 0) {
+					betrag -= akzeptiertesGeld.get(i);
+					geldAusEinzahlen(-akzeptiertesGeld.get(i));
+					listeRueckgeld.add(akzeptiertesGeld.get(i));
+				}else if(geldVorrat[i] == 0) {
+					if(akzeptiertesGeld.get(i).equals(10)) {
+						throw new ValidierungsException("Leider ist die Ausgabe des restlichen Rueckgeldes nicht moeglich, da nicht kleiner gewechselt werden kann!");
+					}
+					betrag -= akzeptiertesGeld.get(i-1);
+					geldAusEinzahlen(-akzeptiertesGeld.get(i-1));
+					listeRueckgeld.add(akzeptiertesGeld.get(i-1));
+				}
 			}
 		}
 	}

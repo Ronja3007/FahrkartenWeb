@@ -54,6 +54,9 @@ public class FrontController extends HttpServlet
 		if(navi.equals("/service") && request.getSession().getAttribute("eingeloggt") == null) {
 			navi = "/login";
 		}
+		if(request.getMethod().toString().equals("GET")){
+			navi = "/menue";
+		}
 		
 		try
 		{
@@ -74,7 +77,7 @@ public class FrontController extends HttpServlet
 		{
 			System.out.println(e.getMessage());
 			meldung.append(e.getMessage());
-//				e.printStackTrace();
+//			e.printStackTrace();
 		}
 
 		request.setAttribute("notifications", meldung.toString());

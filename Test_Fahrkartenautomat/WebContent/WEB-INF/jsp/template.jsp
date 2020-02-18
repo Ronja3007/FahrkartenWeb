@@ -12,16 +12,22 @@
     <link rel="STYLESHEET" type="text/css" href="<c:url value="/include/stylesheet.css"/>">
   </head>
        <body> 
+       <h1>Fahrkarten und Tickets kaufen</h1>
      	   <div id="message" style="color: red;">
                 <c:out value="${notifications}"/>
             </div>
             <div id="inhalt">
-            	<h1>Fahrkarten und Tickets kaufen</h1>
                 <c:import url="${url}"></c:import>
             </div>
     <footer style = "position: fixed; padding: 10px; bottom: 0; left: 0; right: 0">
-          <a href="/Test_Fahrkartenautomat/menue.do"><button style="background-color: green">zurueck zum Hauptmenue</button></a> 
-          <a href="/Test_Fahrkartenautomat/logout.do"><button>Service</button></a>  
+    <table>
+    <tr><td><form action="/Test_Fahrkartenautomat/menue.do" method="post">
+          <button style="background-color: green">zurueck zum Hauptmenue</button> 
+          </form></td>
+          <td><form action="/Test_Fahrkartenautomat/logout.do" method="post">
+          <button>Service</button>  
+          </form></td></tr>
+    </table>   
     </footer> 
     </body>
 </html>

@@ -12,10 +12,14 @@ public class LoginController implements Controller {
 		if (request.getMethod().equals("POST")) {
 			String benutzername = request.getParameter("Benutzername");
 			String passwort = request.getParameter("Passwort");
-			if(benutzername.equals("123") && passwort.equals("123")) {
-				request.getSession().setAttribute("eingeloggt", "ja");
-				new ServiceController().execute(request, response, message);
-				return "/service";
+			if(benutzername != null && passwort != null) {
+				if(benutzername.equals("123") && passwort.equals("123")) {
+					request.getSession().setAttribute("eingeloggt", "ja");
+					new ServiceController().execute(request, response, message);
+					return "/service";
+				}else {
+					throw new Exception("Falsches Passwort oder falscher Benutzername!");
+				}
 			}
 		}
 		return null;
