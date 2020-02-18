@@ -28,16 +28,17 @@ public class ZahlenController implements Controller {
 		
 		preis = preise.get(auswahl-1);
 		request.setAttribute("preis", preis + "0");
+		request.setAttribute("preisZahl", preis);
 		
 		eingezahlt = FahrkartenController.getInstance().getFinanzen().getEingezahlt(); 
 		request.setAttribute("eingezahlt", eingezahlt + "0");
+		request.setAttribute("eingezahltZahl", eingezahlt);
 		
 		double fehlenderBetrag = FahrkartenController.getInstance().getFinanzen().getFehlendesGeld(preis);
 		request.setAttribute("fehlenderBetrag", fehlenderBetrag + "0");
 		
 		double rueckgeld = FahrkartenController.getInstance().getFinanzen().getRueckgabeGeldAnKunden();
 		request.setAttribute("rueckgeld", rueckgeld + "0");
-		request.setAttribute("rueckgeldZahl", rueckgeld);
 		
 		List<Double> zahlungsmittel = FahrkartenController.getInstance().getFinanzen().getAkzeptiertesgeld();
 		request.setAttribute("zahlungsmittel", zahlungsmittel);

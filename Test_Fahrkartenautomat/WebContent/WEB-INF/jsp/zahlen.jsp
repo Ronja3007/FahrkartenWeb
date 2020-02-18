@@ -6,7 +6,7 @@
 <div>
 	Preis: <c:out value="${preis}"></c:out> Euro
 </div>
-<c:if test="${rueckgeldZahl == 0}">
+<c:if test="${eingezahltZahl < preisZahl}">
 	<div>
 	Bitte "werfen" Sie ihre Muenzen/Scheine ein:<br>
 		<table>

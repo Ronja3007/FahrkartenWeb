@@ -149,7 +149,7 @@ import java.util.TreeMap;
 		if(eingezahlt < preisInCent) {
 			fehlendesGeld = preisInCent - eingezahlt;
 		}
-		if(eingezahlt > preisInCent) {
+		if(eingezahlt > preisInCent || eingezahlt == preisInCent) {
 			fehlendesGeld = 0;
 			wechselgeldBerechnen(einzahlungInCent, preisInCent);
 		}
