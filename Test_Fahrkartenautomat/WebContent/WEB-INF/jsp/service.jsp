@@ -5,14 +5,21 @@
 <div>
 Uebersicht Fuellstand:
 <table border="1">
-	<tr><th>Faecher</th><th>Anzahl</th></tr>
+	<tr><th>Faecher</th><th>Anzahl</th><th>Max. Fuellstand</th></tr>
 	<c:forEach var="entry" items="${fuellstand}">
-	  <tr><td><c:out value="${entry.key} Euro"/></td><td><c:out value="${entry.value}"/></td></tr>
+	  <tr><td><c:out value="${entry.key} Euro"/></td><td><c:out value="${entry.value}"/></td>
+	  <td><c:if test="${entry.key < 5}">
+	  		<c:out value="${maxzahlMuenzen}"></c:out>
+	  	</c:if>
+	  	<c:if test="${entry.key >= 5}">
+	  		<c:out value="${maxzahlScheine}"></c:out>
+	  	</c:if>
+	  	</td></tr>
 	</c:forEach>
 </table>
 </div>
 <div>
-Was moechten Sie tun?  
+	Was moechten Sie tun?  
 </div>
 <div>
 <form action ="/Test_Fahrkartenautomat/service.do" method="post">

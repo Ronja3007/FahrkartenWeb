@@ -82,7 +82,7 @@ import java.util.TreeMap;
 						break;
 					}else {
 						System.out.println(CentInEuro(betrag*-1) + "-Fach ist leer!");
-						throw new ValidierungsException(betrag*-1 + "-Fach ist leer!");
+//						throw new ValidierungsException(betrag*-1 + "-Fach ist leer!");
 					}
 				}
 				if(betrag > 0) {
@@ -93,7 +93,7 @@ import java.util.TreeMap;
 							break;
 						}else {
 							System.out.println("Leider ist der " + CentInEuro(betrag) + " Euro-Maximalmuenzstand erreicht!");
-							throw new ValidierungsException("Leider ist dieser Maximalmuenzstand erreicht!");
+//							throw new ValidierungsException("Leider ist dieser Maximalmuenzstand erreicht!");
 						}
 					}else{
 						if(geldVorrat[i] < MAXANZAHLSCHEINE) {
@@ -102,7 +102,7 @@ import java.util.TreeMap;
 							break;
 						}else {
 							System.out.println("Leider ist der " + CentInEuro(betrag) + " Euro-Maximalscheinstand erreicht!");
-							throw new ValidierungsException("Leider ist dieser Maximalscheinstand erreicht!");
+//							throw new ValidierungsException("Leider ist dieser Maximalscheinstand erreicht!");
 						}
 					}
 				}
@@ -159,6 +159,14 @@ import java.util.TreeMap;
 			System.out.println("Dieser Betrag entspricht keinen der aufgefuehrten einzahlbaren Betraege!");
 			throw new ValidierungsException("Dieser Betrag entspricht keinen der aufgefuehrten einzahlbaren Betraege!");
 		}
+	}
+
+	public static int getMaxanzahlscheine() {
+		return MAXANZAHLSCHEINE;
+	}
+
+	public static int getMaxanzahlmuenzen() {
+		return MAXANZAHLMUENZEN;
 	}
 
 	public double getFehlendesGeld(double preis) {
