@@ -38,5 +38,11 @@ Uebersicht Fuellstand:
 </form>
 </div>
 <div>
+	<form action="/Test_Fahrkartenautomat/service.do" method= "post">
+		<input type="hidden" name = "allesLeer" value = "leer">
+		<button type="submit" style="background-color: red;">Alle Faecher leeren</button>
+	</form>
+</div>
+<div>
 <a href=<c:url value='/logout.do'/>><button>Logout</button></a>  
 </div>

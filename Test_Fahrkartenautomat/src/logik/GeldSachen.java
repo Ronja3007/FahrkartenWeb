@@ -246,4 +246,10 @@ import java.util.TreeMap;
 		}
 		return rueckgabe;
 	}
+
+	public void leeren() {
+		for(int i=0; i< geldVorrat.length; i++) {
+			geldVorrat[i] = 0;
+		}
+	}
 }

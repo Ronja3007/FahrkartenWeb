@@ -35,6 +35,12 @@ public class ServiceController implements Controller {
 			fuellstand = getFuellstand();
 			request.setAttribute("fuellstand", fuellstand);
 		}
+		String allesleer = request.getParameter("allesLeer");
+		if(allesleer != null) {
+			FahrkartenController.getInstance().getService().allesLeeren();
+			fuellstand = getFuellstand();
+			request.setAttribute("fuellstand", fuellstand);
+		}
 		return null;
 	}
 

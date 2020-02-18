@@ -28,4 +28,8 @@ public class Service {
 	private void geldAuffuellenLeeren(int anzahl, String fach) throws ValidierungsException{
 		FahrkartenController.getInstance().getFinanzen().geldAuffuellenOderLeeren(fach, anzahl);
 	}
+
+	public void allesLeeren() throws ValidierungsException {
+		FahrkartenController.getInstance().getFinanzen().leeren();
+	}
 }
